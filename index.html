@@ -202,6 +202,16 @@
                 display: none;
             }
         }
+
+        .youtube-player {
+            position: fixed;
+            bottom: -100%;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body>
@@ -240,6 +250,13 @@
             <p class="question">Direction New York! 🍪✈️🗽</p>
         </div>
     </div>
+
+    <!-- Hidden YouTube player for "Run This Town" -->
+    <iframe id="youtubePlayer" class="youtube-player"
+            src="https://www.youtube.com/embed/KOVgUHMvY_w?enablejsapi=1&autoplay=0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+    </iframe>
 
     <script>
         const noButton = document.getElementById('noBtn');
@@ -300,8 +317,17 @@
             document.querySelector('.question-screen').style.display = 'none';
             document.getElementById('successScreen').classList.add('active');
 
+            // Play "Run This Town" from YouTube
+            playMusic();
+
             // Play celebration sound (optional, might need user interaction)
             playSound();
+        }
+
+        function playMusic() {
+            const iframe = document.getElementById('youtubePlayer');
+            // Change autoplay to 1 to start the video
+            iframe.src = 'https://www.youtube.com/embed/KOVgUHMvY_w?autoplay=1&enablejsapi=1';
         }
 
         function createConfetti() {
