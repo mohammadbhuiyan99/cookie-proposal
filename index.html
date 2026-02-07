@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Une Question Importante 🍪</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            position: relative;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .cookie {
+            font-size: 80px;
+            animation: spin 3s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.5em;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            color: #4a4a4a;
+            font-size: 1.5em;
+            margin: 30px 0;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            position: relative;
+        }
+
+        button {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 1.3em;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .no-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            transform: scale(0.95);
+        }
+
+        .success-screen {
+            display: none;
+        }
+
+        .success-screen.active {
+            display: block;
+            animation: celebrate 1s ease-in;
+        }
+
+        @keyframes celebrate {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-screen h1 {
+            font-size: 3em;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+        }
+
+        .gif-container {
+            margin: 30px 0;
+        }
+
+        .gif-container img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hearts {
+            font-size: 2em;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            position: absolute;
+            animation: confetti-fall 3s linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question-screen">
+            <div class="cookie">🍪</div>
+            <h1>Une Question Importante...</h1>
+            <p class="question">
+                Veux-tu être mon cookie pour toujours<br>
+                et venir à New York avec moi? 🗽💕
+            </p>
+            <div class="buttons">
+                <button class="yes-btn" onclick="sayYes()">Oui! 💜</button>
+                <button class="no-btn" id="noBtn" onclick="sayNo()">Non...</button>
+            </div>
+        </div>
+
+        <div class="success-screen" id="successScreen">
+            <h1>YAAAY! 🎉</h1>
+            <div class="hearts">❤️ 💜 💖 💕 ❤️</div>
+            <p class="question">Je savais que tu dirais oui!</p>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGt6ZDV5cjN1YmduZWh5OHg3NXN6dGN6Y3N6YmV4dGF5aHEzOHJvYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oz8xAFtqoOUUrsh7W/giphy.gif"
+                     alt="Celebration!"
+                     onerror="this.src='https://media.giphy.com/media/g9582DNuQppxC/giphy.gif'">
+            </div>
+            <p class="question">Direction New York! 🍪✈️🗽</p>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('noBtn');
+        const phrases = [
+            "Tu es sûre? 🥺",
+            "S'il te plaît dis oui! 🙏",
+            "Allez... Oui? 💜",
+            "Un petit oui? 🍪",
+            "Juste un oui! 😊",
+            "Oui oui oui? 🎀",
+            "Pourquoi pas oui? ✨",
+            "C'mon... Oui! 💕",
+            "Dis oui maintenant! 😄",
+            "Le bouton veut dire OUI! 😉"
+        ];
+
+        let clickCount = 0;
+        let isMoving = false;
+
+        function sayNo() {
+            clickCount++;
+
+            // Change button text
+            if (clickCount <= phrases.length) {
+                noButton.textContent = phrases[clickCount - 1];
+            }
+
+            // After 3 clicks, make the button run away
+            if (clickCount >= 3 && !isMoving) {
+                makeButtonRunAway();
+            }
+
+            // After 7 clicks, auto convert to yes
+            if (clickCount >= 7) {
+                setTimeout(() => {
+                    sayYes();
+                }, 500);
+            }
+        }
+
+        function makeButtonRunAway() {
+            isMoving = true;
+            noButton.style.position = 'absolute';
+
+            noButton.addEventListener('mouseenter', () => {
+                const x = Math.random() * (window.innerWidth - 200);
+                const y = Math.random() * (window.innerHeight - 100);
+                noButton.style.left = x + 'px';
+                noButton.style.top = y + 'px';
+            });
+        }
+
+        function sayYes() {
+            // Create confetti
+            createConfetti();
+
+            // Show success screen
+            document.querySelector('.question-screen').style.display = 'none';
+            document.getElementById('successScreen').classList.add('active');
+
+            // Play celebration sound (optional, might need user interaction)
+            playSound();
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#ff9ff3', '#54a0ff'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        function playSound() {
+            // Optional: Add a celebration sound
+            try {
+                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTcIGWi77eefTRAMUKfj8LZjHAY4ktfz');
+                audio.play().catch(() => {});
+            } catch(e) {}
+        }
+    </script>
+</body>
+</html>
