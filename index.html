@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Une Question Importante 🍪</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -159,10 +160,38 @@
                 opacity: 0;
             }
         }
+
+        .note {
+            position: absolute;
+            top: 20px;
+            right: -180px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: rotate(3deg);
+            border: 2px dashed #ff6b6b;
+            width: 200px;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4em;
+            color: #764ba2;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 1000px) {
+            .note {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="note">
+            You make me laugh,<br>
+            you make me happy too 🍪
+        </div>
+
         <div class="question-screen">
             <div class="cookie">🍪</div>
             <h1>Une Question Importante...</h1>
