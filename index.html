@@ -252,13 +252,35 @@
     </div>
 
     <!-- Hidden YouTube player for "Run This Town" -->
-    <iframe id="youtubePlayer" class="youtube-player"
-            src="https://www.youtube.com/embed/KOVgUHMvY_w?enablejsapi=1&autoplay=0"
-            allow="autoplay; encrypted-media"
-            allowfullscreen>
-    </iframe>
+    <div id="youtubePlayer" class="youtube-player"></div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
 
     <script>
+        let player;
+
+        // Initialize YouTube player when API is ready
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtubePlayer', {
+                height: '1',
+                width: '1',
+                videoId: 'KOVgUHMvY_w', // Run This Town by Jay-Z
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'modestbranding': 1,
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            // Player is ready
+        }
+
         const noButton = document.getElementById('noBtn');
         const phrases = [
             "Tu es sûre? 🥺",
@@ -325,9 +347,10 @@
         }
 
         function playMusic() {
-            const iframe = document.getElementById('youtubePlayer');
-            // Change autoplay to 1 to start the video
-            iframe.src = 'https://www.youtube.com/embed/KOVgUHMvY_w?autoplay=1&enablejsapi=1';
+            // Play the YouTube video
+            if (player && player.playVideo) {
+                player.playVideo();
+            }
         }
 
         function createConfetti() {
