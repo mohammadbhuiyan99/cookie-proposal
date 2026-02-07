@@ -243,6 +243,7 @@
 
     <script>
         const noButton = document.getElementById('noBtn');
+        const yesButton = document.querySelector('.yes-btn');
         const phrases = [
             "Tu es sûre? 🥺",
             "S'il te plaît dis oui! 🙏",
@@ -257,7 +258,6 @@
         ];
 
         let clickCount = 0;
-        let isMoving = false;
 
         function sayNo() {
             clickCount++;
@@ -267,10 +267,15 @@
                 noButton.textContent = phrases[clickCount - 1];
             }
 
-            // After 3 clicks, make the button run away
-            if (clickCount >= 3 && !isMoving) {
-                makeButtonRunAway();
-            }
+            // Make Yes button bigger and No button smaller with each click
+            const yesScale = 1 + (clickCount * 0.2); // Grows by 20% each click
+            const noScale = Math.max(0.4, 1 - (clickCount * 0.1)); // Shrinks by 10% each click, min 40%
+
+            yesButton.style.transform = `scale(${yesScale})`;
+            yesButton.style.transition = 'transform 0.3s ease';
+
+            noButton.style.transform = `scale(${noScale})`;
+            noButton.style.transition = 'transform 0.3s ease';
 
             // After 7 clicks, auto convert to yes
             if (clickCount >= 7) {
@@ -280,42 +285,6 @@
             }
         }
 
-        function makeButtonRunAway() {
-            isMoving = true;
-            noButton.style.position = 'absolute';
-
-            // Make the button smaller and harder to click
-            noButton.style.transform = 'scale(0.7)';
-            noButton.style.fontSize = '0.9em';
-
-            const moveButton = () => {
-                const containerRect = container.getBoundingClientRect();
-                const buttonWidth = 100;
-                const buttonHeight = 50;
-
-                // Random position but avoid the center where Yes button is
-                let x, y;
-                do {
-                    x = Math.random() * (containerRect.width - buttonWidth);
-                    y = Math.random() * (containerRect.height - buttonHeight);
-                } while (
-                    // Avoid center area where Yes button is
-                    x > containerRect.width / 3 &&
-                    x < (containerRect.width * 2) / 3 &&
-                    y > containerRect.height / 2 - 100 &&
-                    y < containerRect.height / 2 + 100
-                );
-
-                noButton.style.left = x + 'px';
-                noButton.style.top = y + 'px';
-            };
-
-            noButton.addEventListener('mouseenter', moveButton);
-            noButton.addEventListener('touchstart', moveButton);
-
-            // Move it immediately for mobile
-            moveButton();
-        }
 
         function sayYes() {
             // Create confetti
