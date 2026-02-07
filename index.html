@@ -178,8 +178,27 @@
             line-height: 1.5;
         }
 
+        .necklace {
+            position: absolute;
+            top: 20px;
+            left: -180px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transform: rotate(-3deg);
+            border: 2px dashed #f093fb;
+            width: 180px;
+        }
+
+        .necklace img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
         @media (max-width: 1000px) {
-            .note {
+            .note, .necklace {
                 display: none;
             }
         }
@@ -187,6 +206,10 @@
 </head>
 <body>
     <div class="container">
+        <div class="necklace">
+            <img src="https://i.imgur.com/9r3qKJX.png" alt="Heart Necklace" onerror="this.src='https://png.pngtree.com/png-vector/20231214/ourmid/pngtree-heart-shaped-necklace-png-image_11371029.png'">
+        </div>
+
         <div class="note">
             You make me laugh,<br>
             you make me happy too 🍪
