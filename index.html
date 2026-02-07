@@ -232,8 +232,8 @@
         </div>
 
         <div class="note">
-            You make me laugh,<br>
-            you make me happy too 🍪
+            Life's less terrible<br>
+            with you around 🍪
         </div>
 
         <div class="question-screen">
@@ -283,6 +283,16 @@
             "Le bouton veut dire OUI! 😉"
         ];
 
+        const cryingGifs = [
+            "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif",
+            "https://media.giphy.com/media/L95W4wv8nnb9K/giphy.gif",
+            "https://media.giphy.com/media/ROF8OQvDmxytW/giphy.gif",
+            "https://media.giphy.com/media/ISOckXUybVfQ4/giphy.gif",
+            "https://media.giphy.com/media/9Y5BbDSkSTiY8/giphy.gif",
+            "https://media.giphy.com/media/gfsQffBnuc6e096brx/giphy.gif",
+            "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif"
+        ];
+
         let clickCount = 0;
 
         function sayNo() {
@@ -293,9 +303,17 @@
                 noButton.textContent = phrases[clickCount - 1];
             }
 
-            // Show crying GIF on first click
-            if (clickCount === 1) {
-                document.getElementById('cryingGif').classList.add('show');
+            // Show crying GIF and change it with each click
+            const cryingGifElement = document.getElementById('cryingGif');
+            const gifImg = cryingGifElement.querySelector('img');
+
+            // Update GIF source based on click count
+            const gifIndex = (clickCount - 1) % cryingGifs.length;
+            gifImg.src = cryingGifs[gifIndex];
+
+            // Show the GIF container
+            if (!cryingGifElement.classList.contains('show')) {
+                cryingGifElement.classList.add('show');
             }
 
             // Make Yes button bigger and No button smaller with each click
