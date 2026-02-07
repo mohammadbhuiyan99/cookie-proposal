@@ -197,6 +197,27 @@
             border-radius: 5px;
         }
 
+        .crying-gif {
+            margin: 20px 0;
+            opacity: 0;
+            transform: scale(0);
+            transition: all 0.5s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .crying-gif.show {
+            opacity: 1;
+            transform: scale(1);
+            max-height: 300px;
+        }
+
+        .crying-gif img {
+            max-width: 250px;
+            width: 100%;
+            border-radius: 15px;
+        }
+
         @media (max-width: 1000px) {
             .note, .necklace {
                 display: none;
@@ -222,6 +243,11 @@
                 Veux-tu être mon cookie pour toujours<br>
                 et venir à New York avec moi? 🗽💕
             </p>
+
+            <div class="crying-gif" id="cryingGif">
+                <img src="https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif" alt="Crying">
+            </div>
+
             <div class="buttons">
                 <button class="yes-btn" onclick="sayYes()">Oui! 💜</button>
                 <button class="no-btn" id="noBtn" onclick="sayNo()">Non...</button>
@@ -265,6 +291,11 @@
             // Change button text
             if (clickCount <= phrases.length) {
                 noButton.textContent = phrases[clickCount - 1];
+            }
+
+            // Show crying GIF on first click
+            if (clickCount === 1) {
+                document.getElementById('cryingGif').classList.add('show');
             }
 
             // Make Yes button bigger and No button smaller with each click
