@@ -202,16 +202,6 @@
                 display: none;
             }
         }
-
-        .youtube-player {
-            position: fixed;
-            bottom: -100%;
-            left: 0;
-            width: 1px;
-            height: 1px;
-            opacity: 0;
-            pointer-events: none;
-        }
     </style>
 </head>
 <body>
@@ -251,36 +241,7 @@
         </div>
     </div>
 
-    <!-- Hidden YouTube player for "Run This Town" -->
-    <div id="youtubePlayer" class="youtube-player"></div>
-
-    <!-- Load YouTube IFrame API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
-
     <script>
-        let player;
-
-        // Initialize YouTube player when API is ready
-        function onYouTubeIframeAPIReady() {
-            player = new YT.Player('youtubePlayer', {
-                height: '1',
-                width: '1',
-                videoId: 'KOVgUHMvY_w', // Run This Town by Jay-Z
-                playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'modestbranding': 1,
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
-            });
-        }
-
-        function onPlayerReady(event) {
-            // Player is ready
-        }
-
         const noButton = document.getElementById('noBtn');
         const phrases = [
             "Tu es sûre? 🥺",
@@ -339,18 +300,8 @@
             document.querySelector('.question-screen').style.display = 'none';
             document.getElementById('successScreen').classList.add('active');
 
-            // Play "Run This Town" from YouTube
-            playMusic();
-
-            // Play celebration sound (optional, might need user interaction)
+            // Play celebration sound
             playSound();
-        }
-
-        function playMusic() {
-            // Play the YouTube video
-            if (player && player.playVideo) {
-                player.playVideo();
-            }
         }
 
         function createConfetti() {
@@ -370,9 +321,10 @@
         }
 
         function playSound() {
-            // Optional: Add a celebration sound
+            // Play celebration "YAYYY!" sound
             try {
-                const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTcIGWi77eefTRAMUKfj8LZjHAY4ktfz');
+                const audio = new Audio('https://www.myinstants.com/media/sounds/yay-sound-effect.mp3');
+                audio.volume = 0.5;
                 audio.play().catch(() => {});
             } catch(e) {}
         }
